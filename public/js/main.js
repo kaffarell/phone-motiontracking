@@ -4,4 +4,22 @@ window.mobileAndTabletCheck = function() {
     return check;
 };
 
-document.write(window.mobileAndTabletCheck());
+if(window.mobileAndTabletCheck() = true){
+    const options = { frequency: 60, referenceFrame: 'device' };
+    const sensor = new RelativeOrientationSensor(options);
+    var alpha;
+    var beta;
+    var gamma;
+
+    sensor.addEventListener('reading', () => {
+        console.log(sensor);
+    });
+    sensor.addEventListener('error', error => {
+        if (event.error.name == 'NotReadableError') {
+            console.log("Sensor is not available.");
+        }
+    });
+    sensor.start();
+
+    document.write(`${alpha} ${beta} ${gamma}`);
+}
