@@ -14,8 +14,11 @@ function updateData(){
         
     
         sensor.addEventListener('reading', () => {
-            console.log(sensor);
-            document.write(`${alpha} ${beta} ${gamma}`);
+            // Not sure!
+            alpha = sensor.quaternion[0];
+            beta = sensor.quaternion[1];
+            gamma = sensor.quaternion[2];
+            document.log(`${alpha}    ${beta}    ${gamma}    ${sensor.quaternion[3]}`);
         });
         sensor.addEventListener('error', error => {
             if (event.error.name == 'NotReadableError') {
@@ -32,8 +35,6 @@ function updateData(){
          } else {
            console.log("No permissions to use RelativeOrientationSensor.");
          }
-        });
-    
-        console.log(`${alpha} ${beta} ${gamma}`);
+        });    
     }
 }
