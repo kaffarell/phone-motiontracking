@@ -4,4 +4,4 @@ window.mobileAndTabletCheck = function() {
     return check;
 };
 
-console.log(window.mobileAndTabletCheck());
+document.write(window.mobileAndTabletCheck());
