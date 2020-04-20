@@ -18,7 +18,7 @@ function updateData(){
             alpha = sensor.quaternion[0];
             beta = sensor.quaternion[1];
             gamma = sensor.quaternion[2];
-            document.log(`${alpha}    ${beta}    ${gamma}    ${sensor.quaternion[3]}`);
+            console.log(`${alpha}    ${beta}    ${gamma}    ${sensor.quaternion[3]}`);
         });
         sensor.addEventListener('error', error => {
             if (event.error.name == 'NotReadableError') {
