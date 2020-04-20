@@ -15,6 +15,7 @@ function updateData(){
     
         sensor.addEventListener('reading', () => {
             console.log(sensor);
+            document.write(sensor);
         });
         sensor.addEventListener('error', error => {
             if (event.error.name == 'NotReadableError') {
@@ -34,5 +35,6 @@ function updateData(){
         });
     
         console.log(`${alpha} ${beta} ${gamma}`);
+        document.write(`${alpha} ${beta} ${gamma}`);
     }
 }
