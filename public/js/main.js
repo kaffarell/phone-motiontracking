@@ -4,22 +4,35 @@ window.mobileAndTabletCheck = function() {
     return check;
 };
 
-if(window.mobileAndTabletCheck() = true){
-    const options = { frequency: 60, referenceFrame: 'device' };
-    const sensor = new RelativeOrientationSensor(options);
-    var alpha;
-    var beta;
-    var gamma;
+function updateData(){
+    if(window.mobileAndTabletCheck() === true){
+        const options = { frequency: 60, referenceFrame: 'device' };
+        const sensor = new RelativeOrientationSensor(options);
+        var alpha;
+        var beta;
+        var gamma;
+        
+    
+        sensor.addEventListener('reading', () => {
+            console.log(sensor);
+        });
+        sensor.addEventListener('error', error => {
+            if (event.error.name == 'NotReadableError') {
+                console.log("Sensor is not available.");
+            }
+        });
 
-    sensor.addEventListener('reading', () => {
-        console.log(sensor);
-    });
-    sensor.addEventListener('error', error => {
-        if (event.error.name == 'NotReadableError') {
-            console.log("Sensor is not available.");
-        }
-    });
-    sensor.start();
-
-    document.write(`${alpha} ${beta} ${gamma}`);
+        // Check for permissions then start sensor
+        Promise.all([navigator.permissions.query({ name: "accelerometer" }),
+             navigator.permissions.query({ name: "gyroscope" })])
+            .then(results => {
+         if (results.every(result => result.state === "granted")) {
+           sensor.start();
+         } else {
+           console.log("No permissions to use RelativeOrientationSensor.");
+         }
+        });
+    
+        console.log(`${alpha} ${beta} ${gamma}`);
+    }
 }
