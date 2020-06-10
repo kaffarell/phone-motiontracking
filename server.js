@@ -2,6 +2,19 @@ const express = require('express');
 const WSS = require('websocket').server;
 const http = require('http');
 
+
+const app = express();
+const apiRoutes = require('./routes/api');
+
+let portNumber = process.env.PORT || 3000;
+
+app.use(express.static('public'));
+app.use('/api', apiRoutes);
+
+app.listen(portNumber, () => {
+    console.log(`Server running on Port ${portNumber}!`);
+});
+
 const server =  http.createServer();
 server.listen(8181);
 
@@ -25,15 +38,3 @@ wss.on('request', request => {
         }
     })
 })
-
-const app = express();
-const apiRoutes = require('./routes/api');
-
-let portNumber = process.env.PORT || 3000;
-
-app.use(express.static('public'));
-app.use('/api', apiRoutes);
-
-app.listen(portNumber, () => {
-    console.log(`Server running on Port ${portNumber}!`);
-});
