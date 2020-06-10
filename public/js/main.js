@@ -5,6 +5,8 @@ window.mobileAndTabletCheck = function() {
 };
 
 function updateData(){
+    const socket = new WebSocket('ws://localhost:8181/');
+
     if(window.mobileAndTabletCheck() === true){
         const options = { frequency: 60, referenceFrame: 'device' };
         const sensor = new RelativeOrientationSensor(options);
@@ -14,17 +16,25 @@ function updateData(){
         
     
         sensor.addEventListener('reading', () => {
-            // Not sure!
+            // Pitch
             alpha = sensor.quaternion[0];
+            // Roll
             beta = sensor.quaternion[1];
+            // Yaw
             gamma = sensor.quaternion[2];
-            console.log(`${alpha}    ${beta}    ${gamma}    ${sensor.quaternion[3]}`);
+            console.log(`${alpha}    ${beta}    ${gamma}`);
         });
         sensor.addEventListener('error', error => {
             if (event.error.name == 'NotReadableError') {
                 console.log("Sensor is not available.");
             }
         });
+        coordinates = {
+            'alpha': alpha,
+            'beta': beta,
+            'gamma': gamma
+        };
+        socket.send(coordinates);
 
         // Check for permissions then start sensor
         Promise.all([navigator.permissions.query({ name: "accelerometer" }),
@@ -36,5 +46,9 @@ function updateData(){
            console.log("No permissions to use RelativeOrientationSensor.");
          }
         });    
+    }else{
+        socket.onmessage = msg => {
+            console.log(msg);
+        }
     }
 }
