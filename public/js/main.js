@@ -5,7 +5,7 @@ window.mobileAndTabletCheck = function() {
 };
 
 function updateData(){
-    const socket = new WebSocket('ws://phone-motiontracking.herokuapp.com:8181/');
+    const socket = new WebSocket('wss://localhost:8181/', 'chat');
 
     if(window.mobileAndTabletCheck() === true){
         const options = { frequency: 60, referenceFrame: 'device' };
