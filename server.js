@@ -16,6 +16,7 @@ let portNumber = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/public'));
 
 app.post('/send', jsonParser, (req, res) => {
+	console.log('send post');
 	data.alpha = req.body.alpha	
 	data.beta = req.body.beta;
 	data.gamma = req.body.gamma;
@@ -24,6 +25,7 @@ app.post('/send', jsonParser, (req, res) => {
 });
 
 app.get('/get', (req, res) => {
+	console.log('send post');
 	console.log('Get Data: ' + data);
 	res.json(data);
 });
