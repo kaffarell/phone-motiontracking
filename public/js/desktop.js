@@ -36,9 +36,9 @@ function animate(){
     setTimeout(() => {
         updateData();
         if(coordinates !== undefined){
-            phone.rotation.x = coordinates.alpha.toFixed(2);
-            phone.rotation.y = coordinates.gamma.toFixed(2);
-            phone.rotation.z = coordinates.beta.toFixed(2) * (-1);
+            phone.rotation.x = coordinates.alpha.toFixed(2) * 2;
+            phone.rotation.y = coordinates.gamma.toFixed(2) * 2;
+            phone.rotation.z = coordinates.beta.toFixed(2) * (-1) * 2;
         }
         renderer.render(scene, camera);
     }, 800);
