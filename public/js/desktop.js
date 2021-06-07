@@ -1,3 +1,6 @@
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js'
+
 let scene, camera, renderer, phone;
 let coordinates;
 
@@ -9,7 +12,7 @@ function init(){
     renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
-    var loader = new THREE.GLTFLoader().setPath('js/phone/');
+    var loader = new GLTFLoader().setPath('js/phone/');
     loader.load('scene.gltf', (gltf) => {
         phone = gltf.scene;
         scene.add(gltf.scene);
