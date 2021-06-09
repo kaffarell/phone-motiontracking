@@ -19,15 +19,11 @@ function init(){
     }, undefined, (err) => console.log(err));
 
     document.body.appendChild(renderer.domElement);
-    /*
-    const geometry = new THREE.BoxGeometry(2, 2, 2);
-    //const material = new THREE.MeshBasicMaterial({color: 0x0000ff});
-    const texture = new THREE.TextureLoader().load('js/textures/create.gif');
-    const material = new THREE.MeshBasicMaterial({map: texture});
-    cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-    */
     camera.position.z = 200;
+}
+
+export function getCoordinates(){
+    return coordinates;
 }
 
 
@@ -36,9 +32,9 @@ function animate(){
     setTimeout(() => {
         updateData();
         if(coordinates !== undefined){
-            phone.rotation.x = coordinates.alpha.toFixed(2) * 2;
-            phone.rotation.y = coordinates.gamma.toFixed(2) * 2;
-            phone.rotation.z = coordinates.beta.toFixed(2) * (-1) * 2;
+            phone.rotation.x = coordinates.alpha.toFixed(4) * 2;
+            phone.rotation.y = coordinates.gamma.toFixed(4) * 2;
+            phone.rotation.z = coordinates.beta.toFixed(4) * (-1) * 2;
         }
         renderer.render(scene, camera);
     }, 800);
@@ -54,15 +50,17 @@ function onWindowResize(){
 window.addEventListener('resize', onWindowResize, false);
 
 
-init();
-animate();
 
 function updateData(){
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
             coordinates = JSON.parse(this.responseText);
-		    document.getElementById('demo').innerHTML = this.responseText;
+            let outputString = 
+                "<br> alpha: " + coordinates.alpha.toFixed(4) * 2 + 
+                "<br> beta: " + coordinates.beta.toFixed(4) * 2 + 
+                "<br> gamma: " + coordinates.gamma.toFixed(4) * (-1) * 2;
+		    document.getElementById('numbers').innerHTML = outputString + "<br><br>" + this.responseText;
 		}
 	};
 	xhttp.open('GET', 'get');
@@ -70,3 +68,5 @@ function updateData(){
 	xhttp.send();
 }
 
+init();
+animate();

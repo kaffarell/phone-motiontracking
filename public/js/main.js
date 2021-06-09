@@ -1,5 +1,5 @@
 function updateData(){
-	const options = { frequency: 60, referenceFrame: 'device' };
+	const options = { frequency: 120, referenceFrame: 'device' };
     const sensor = new RelativeOrientationSensor(options);
     var alpha;
     var beta;
@@ -27,7 +27,7 @@ function updateData(){
 		};
 		xhttp.open('POST', 'send');
 		xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-		console.log(coordinates)
+		//console.log(coordinates)
 		xhttp.send(JSON.stringify(coordinates));
     });
     
