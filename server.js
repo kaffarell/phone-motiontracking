@@ -40,6 +40,4 @@ app.post('/send', jsonParser, (req, res) => {
 
 app.get('/get', (req, res) => {
 	res.json(data);
-	console.log(data);
 });
-

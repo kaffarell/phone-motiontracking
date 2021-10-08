@@ -32,9 +32,14 @@ function animate(){
     setTimeout(() => {
         updateData();
         if(coordinates !== undefined){
+            /*
             phone.rotation.x = coordinates.alpha.toFixed(4) * 2;
             phone.rotation.y = coordinates.gamma.toFixed(4) * 2;
             phone.rotation.z = coordinates.beta.toFixed(4) * (-1) * 2;
+            */
+            phone.rotation.x = coordinates.beta.toFixed(4) / 180;
+            phone.rotation.y = coordinates.alpha.toFixed(6) / 90;
+            phone.rotation.z = coordinates.gamma.toFixed(6) / 360;
         }
         renderer.render(scene, camera);
     }, 800);

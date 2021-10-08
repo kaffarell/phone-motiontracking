@@ -1,5 +1,34 @@
 function updateData(){
-	const options = { frequency: 120, referenceFrame: 'device' };
+
+	function handleOrientation(event) {
+		var absolute = event.absolute;
+		var alpha    = event.alpha;
+		var beta     = event.beta;
+		var gamma    = event.gamma;
+   		coordinates = {
+    		'alpha': alpha,
+        	'beta': beta,
+        	'gamma': gamma 
+    	};
+		let xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				console.log(this.responseText);
+			}
+		};
+		xhttp.open('POST', 'send');
+		xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+		//console.log(coordinates)
+		xhttp.send(JSON.stringify(coordinates));
+	  
+	}
+
+	window.addEventListener("deviceorientation", handleOrientation, true);
+	  
+
+	/*
+
+	const options = { frequency: 50, referenceFrame: 'device' };
     const sensor = new RelativeOrientationSensor(options);
     var alpha;
     var beta;
@@ -49,4 +78,6 @@ function updateData(){
            			console.log("No permissions to use RelativeOrientationSensor.");
          		}
         	}); 
+			*/
+
 }
