@@ -1,38 +1,10 @@
 function updateData(){
 
-	function handleOrientation(event) {
-		var absolute = event.absolute;
-		var alpha    = event.alpha;
-		var beta     = event.beta;
-		var gamma    = event.gamma;
-   		coordinates = {
-    		'alpha': alpha,
-        	'beta': beta,
-        	'gamma': gamma 
-    	};
-		let xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function(){
-			if(this.readyState == 4 && this.status == 200){
-				console.log(this.responseText);
-			}
-		};
-		xhttp.open('POST', 'send');
-		xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-		//console.log(coordinates)
-		xhttp.send(JSON.stringify(coordinates));
-	  
-	}
-
-	window.addEventListener("deviceorientation", handleOrientation, true);
-	  
-
-	/*
-
 	const options = { frequency: 50, referenceFrame: 'device' };
     const sensor = new RelativeOrientationSensor(options);
-    var alpha;
-    var beta;
-    var gamma;
+    let alpha;
+    let beta;
+    let gamma;
     
     
     sensor.addEventListener('reading', () => {
@@ -63,21 +35,21 @@ function updateData(){
 
 	sensor.addEventListener('error', error => {
     	if (event.error.name == 'NotReadableError') {
-    		console.log("Sensor is not available.");
+    		console.log('Sensor is not available.');
     	}
 	});
 
 
     // Check for permissions then start sensor
-    Promise.all([navigator.permissions.query({ name: "accelerometer" }),
-    	navigator.permissions.query({ name: "gyroscope" })])
+    Promise.all([navigator.permissions.query({ name: 'accelerometer' }),
+    	navigator.permissions.query({ name: 'gyroscope' })])
         	.then(results => {
-         		if (results.every(result => result.state === "granted")) {
+         		if (results.every(result => result.state === 'granted')) {
+					 console.log('Starting RelativeOrientationSensor')
            			sensor.start();
          		} else {
-           			console.log("No permissions to use RelativeOrientationSensor.");
+           			console.log('No permissions to use RelativeOrientationSensor.');
          		}
         	}); 
-			*/
 
 }
