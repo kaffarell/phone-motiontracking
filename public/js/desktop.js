@@ -12,7 +12,7 @@ function init(){
     renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
-    var loader = new GLTFLoader().setPath('js/phone2/');
+    var loader = new GLTFLoader().setPath('js/phone/');
     loader.load('scene.gltf', (gltf) => {
         phone = gltf.scene;
         scene.add(gltf.scene);
@@ -57,9 +57,9 @@ function updateData(){
 		if(this.readyState == 4 && this.status == 200){
             coordinates = JSON.parse(this.responseText);
             let outputString = 
-                "<br> alpha: " + coordinates.alpha.toFixed(4) * 2 + 
-                "<br> beta: " + coordinates.beta.toFixed(4) * 2 + 
-                "<br> gamma: " + coordinates.gamma.toFixed(4) * (-1) * 2;
+                "<br> alpha: " + (coordinates.alpha.toFixed(4) * 2) + 
+                "<br> beta: " + (coordinates.beta.toFixed(4) * 2) + 
+                "<br> gamma: " + (coordinates.gamma.toFixed(4) * (-1) * 2);
 		    document.getElementById('numbers').innerHTML = outputString + "<br><br>" + this.responseText;
 		}
 	};
